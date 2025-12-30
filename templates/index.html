@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>ML Hackathon Submission</title>
+		<style>
+.problems, form{
+	border: 3px solid black;
+	align-items: center;
+	width: max(40rem, 30%);
+	margin: auto;
+	padding: 2rem;
+	background-color: #edbb;
+}
+section{
+	border: 3px solid black;
+	align-items: center;
+	width: max(30rem, 30%);
+	margin: 2rem auto;
+	padding: 2rem;
+	background-color: #dddd;
+}
+		</style>
+	</head>
+	<body>
+		<section>
+			<h1>PCON's ML HACKATHON 2026</h1>
+		</section>
+		<section class="problems">
+			<h2>Problems</h2>
+			<ol>
+				<li> For problem 1:
+					<ul> 
+						<li><a href="dataset_1.csv">Dataset</a></li>
+						<li><a href="evaluation_set_1.csv">Evaluation Set</a></li>
+					</ul>
+				</li>
+				<li> For problem 2:
+					<ul> 
+						<li><a href="dataset_2.csv">Dataset</a></li>
+						<li><a href="evaluation_set_2.csv">Evaluation Set</a></li>
+					</ul>
+				</li>
+			</ol>
+		</section>
+		<section>
+			<h2>CSV format for subission</h2>
+			<p>
+			For problem 1, that is the classification problem the csv file must have 10,000 lines of binary output
+			<ul>
+				<li> No headers</li>
+				<li> There must not be any aphanumeric characters other than 0 and 1</li>
+				<li> The i'th entry in the file must correspond to the ith entry of the test set</li>
+			</ul>
+			</p>
+			<p>
+			For problem 2, that is the regression problem the csv file must have 10,000 lines of integer output
+			<ul>
+				<li> No headers</li>
+				<li> There must only be integer values in the file</li>
+				<li> The i'th entry in the file must correspond to the ith entry of the test set</li>
+			</ul>
+			</p>
+		</section>
+		<form method="POST" enctype="multipart/form-data">
+			<h3> Submit your results here :) </h3>
+			<label for="name">Name:</label>
+			<input type="text" id="name" name="name" required><br><br>
+
+			<label for="roll">Registration No:</label>
+			<input type="text" id="roll" name="roll" required><br><br>
+
+			<label for="p1_file"><i>csv submission for problem 1: </i></label>
+			<input type="file" id="p1_file" name="p1_file" accept=".csv"><br><br>
+			<label for="p2_file"><i>csv submission for problem 2:</i></label>
+			<input type="file" id="p2_file" name="p2_file" accept=".csv"><br><br>
+
+			{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+			<ul class="flashes">
+				{% for category, message in messages %}
+				<li class="{{ category }}" style="color: {% if category == 'error' %}red{% elif category == 'success' %}green{% else %}black{% endif %};">{{ message }}</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+			{% endwith %}
+			<input type="submit" value="Submit">
+		</form>
+		<section class="board">
+			<h2>Leaderboard</h2>
+			<table border="1">
+				<thead>
+					<tr>
+						<th>Roll ID</th>
+						<th>Name</th>
+						<th>P1 Score</th>
+						<th>P1 Attempts Remaining</th>
+						<th>P2 Score</th>
+						<th>P2 Attempts Remaining</th>
+						<th>TOTAL SCORE</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for entry in leaderboard %}
+					<tr>
+						<td>{{ entry.roll_id }}</td>
+						<td>{{ entry.name }}</td>
+						<td>{{ "%.2f"|format(entry.p1_score) }}</td>
+						<td>{{ 3 - entry.p1_attempts }}</td>
+						<td>{{ "%.2f"|format(entry.p2_score) }}</td>
+						<td>{{ 3 - entry.p2_attempts }}</td>
+						<td>{{ "%.2f"|format(entry.total_score) }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</section>
+	</body>
+</html>
