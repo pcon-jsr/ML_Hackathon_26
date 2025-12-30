@@ -10,6 +10,7 @@ from flask import (
 import os
 import pandas as pd
 import numpy as np
+import re
 from werkzeug.utils import secure_filename
 
 # Control knobs
@@ -119,16 +120,8 @@ def calculate_p2_score(submission_df):
         print("DEBUG: p2_eval_labels or p2_eval_data is None in calculate_p2_score")
         return -1000
 
-    # Extract predictions based on whether header was detected
-    try:
-        float(submission_df.iloc[0, 0])
-        has_header = False
-    except (ValueError, TypeError):
-        has_header = True
-    if has_header:
-        predictions = submission_df.iloc[1:, 0]
-    else:
-        predictions = submission_df.iloc[:, 0]
+    predictions = submission_df.iloc[:, 0]
+    predictions = pd.to_numeric(predictions, errors="coerce")
 
     true_labels = p2_eval_labels.squeeze()
 
@@ -157,11 +150,10 @@ def validate_p1_submission(submission_df):
     if submission_df.shape[1] != 1:
         flash("P1 submission must have exactly one column.", "error")
         return False
-    expected_length = P2_EXPECTED_ROWS
-    predictions = submission_df.iloc[0:, 0]
-    if len(predictions) != expected_length:
+    predictions = submission_df.iloc[:, 0]
+    if len(predictions) != P1_EXPECTED_ROWS:
         flash(
-            f"P2 submission must have exactly {expected_length} predictions.", "error"
+            f"P1 submission must have exactly {P1_EXPECTED_ROWS} predictions.", "error"
         )
         return False
     predictions_numeric = []
@@ -182,14 +174,21 @@ def validate_p2_submission(submission_df):
     if submission_df.shape[1] != 1:
         flash("P2 submission must have exactly one column.", "error")
         return False
-    expected_length = P2_EXPECTED_ROWS
-    predictions = submission_df.iloc[0:, 0]
-    if len(predictions) != expected_length:
+    predictions = submission_df.iloc[:, 0]
+    if len(predictions) != P2_EXPECTED_ROWS:
         flash(
-            f"P2 submission must have exactly {expected_length} predictions.", "error"
+            f"P2 submission must have exactly {P2_EXPECTED_ROWS} predictions.", "error"
         )
         return False
-    if not pd.api.types.is_integer_dtype(predictions):
+    predictions_numeric = []
+    for p in predictions:
+        try:
+            num = float(p)
+            predictions_numeric.append(num)
+        except (ValueError, TypeError):
+            flash("Non-numeric value in P2 predictions.", "error")
+            return False
+    if not all(p == int(p) for p in predictions_numeric):
         flash("P2 predictions must be integers.", "error")
         return False
     return True
@@ -209,6 +208,25 @@ def index():
         if not roll_id or not name:
             flash("Roll ID and Name are required.", "error")
             print("DEBUG: Roll ID or Name missing.")
+            return redirect(url_for("index"))
+
+        # Validate name length
+        if len(name) > 50:
+            flash("Name must be 50 characters or less.", "error")
+            return redirect(url_for("index"))
+
+        # Validate roll_id format
+        roll_pattern = r"^2024(ug|pg)[a-z]{2}\d{3}$"
+        if not re.match(roll_pattern, roll_id):
+            flash(
+                "Invalid Roll no.",
+                "error",
+            )
+            return redirect(url_for("index"))
+        # Check the 3 digits are between 000 and 150
+        digits = int(roll_id[7:10])
+        if digits > 150:
+            flash("Roll ID number must be between 000 and 150.", "error")
             return redirect(url_for("index"))
 
         user_entry = leaderboard[leaderboard["roll_id"] == roll_id]
