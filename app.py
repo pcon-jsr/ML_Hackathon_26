@@ -109,7 +109,14 @@ def calculate_p1_score(submission_df):
     fp = ((predictions == 1) & (true_labels == 0)).sum()
     fn = ((predictions == 0) & (true_labels == 1)).sum()
 
-    score = (tp * 10) + (tn * 8) - (fp * 5) - (fn * 4)
+    # score = (tp * 10) + (tn * 8) - (fp * 5) - (fn * 4)
+
+    # f1 score
+    precision = tp / (tp + fp) if (tp + fp) > 0 else 0
+    recall = tp / (tp + fn) if (tp + fn) > 0 else 0
+    f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+    score = f1 * 10000
+
     print(f"DEBUG: P1 calculated score: {score}")
     return score
 
@@ -141,7 +148,9 @@ def calculate_p2_score(submission_df):
 
     tau = 0.1
     e = np.abs(predictions - true_labels) / capacity
-    pcoins = 100 / (1 + (e / tau) ** 2)
+    print(f"DEBUG: Number of correct predictions (e=0): {(e == 0).sum()}")
+    # pcoins = 100 / (1 + (e / tau) ** 2)
+    pcoins = 1 / (1 + (e / tau) ** 2)
     print(f"DEBUG: P2 calculated score: {pcoins.sum()}")
     return pcoins.sum()
 
@@ -224,7 +233,7 @@ def index():
             )
             return redirect(url_for("index"))
         # Check the 3 digits are between 000 and 150
-        digits = int(roll_id[7:10])
+        digits = int(roll_id[8:11])
         if digits > 150:
             flash("Roll ID number must be between 000 and 150.", "error")
             return redirect(url_for("index"))
