@@ -227,7 +227,7 @@ OUTLIER_PROB = 0.03
 NULL_PROBS = {
     "promotion_level": (0.02, 0.05),
     "event_duration": (0.01, 0.03),
-    "venue_capacity": (0.01, 0.03),
+    # "venue_capacity": (0.01, 0.03),
     "registration_fee": (0.02, 0.04),
     "social_media_buzz": (0.03, 0.06),
     "concurrent_events_count": (0.01, 0.02),
