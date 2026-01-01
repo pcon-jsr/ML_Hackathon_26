@@ -7,32 +7,32 @@
 \usepackage{geometry}
 \usepackage{array}
 \usepackage{graphicx}
-\usepackage{hyperref}
 \usepackage{forest}
 \usepackage{float}
 \usepackage[table]{xcolor}
 \usepackage{amsmath}
-
 \geometry{margin=1in}
 
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
 
 % ---------------- Header & Footer ----------------
 \pagestyle{fancy}
 \fancyhf{}
 
-\fancyhead[L]{\textbf{PCON's ML Hackathon 2026}}
+\fancyhead[R]{\textbf{ML Hackathon 2026}}
+\fancyhead[L]{\textbf{PCON}}
 
 \renewcommand{\headrulewidth}{0.4pt}
 
 \renewcommand{\footrulewidth}{0.4pt}
-\fancyfoot[C]{Page \thepage}
+\fancyfoot[C]{\thepage}
 
 
 % ---------------- Document ----------------
 \begin{document}
 
 \pagenumbering{arabic}
-\setcounter{page}{1}
+\setcounter{secnumdepth}{0}
 
 \input{chapters/content.tex}
 

@@ -1,74 +1,56 @@
-\clearpage
-\thispagestyle{empty}
-\vspace*{\fill}
+\begin{titlepage}
+	\thispagestyle{empty}
+	\centering
 
-\begin{center}
-    % Project Title
-    {\Huge \bfseries PCON's Annual Machine Learning \\[0.5cm]Hackathon '26}
-    
-    \vspace{3cm}
-    
-    % Date
-    {\Large \today}
-\end{center}
 
-\vspace*{\fill}
+	{\fontsize{36}{44}\selectfont\bfseries Machine Learning Hackathon '26\par}
+
+	\vfill
+
+	{\Large\texttt{@>--;--}\par}
+
+	\vfill
+
+	{\itshape authored by\par}
+	\vspace{0.25cm}
+	{\Large Ayush Jayaswal\par}
+	{\Large Chandrima Hazra\par}
+
+
+\end{titlepage}
 \newpage
 
 
-Welcome to \textbf{PCON’s Annual Machine Learning Hackathon ’26}, a 36-hour
-challenge.
-
 \section*{Rules}
 \begin{enumerate}
-    \item All solutions must be developed strictly during the hackathon period.
-    \item Participants may use any programming language, framework, or machine
-    learning library.
-    \item Each participant must work on \textbf{only one} problem statement.
-    \item Create a \textbf{new GitHub repository} for the hackathon submission, and all work must be original.
-    \item Commit messages should be clear and meaningful.
-    \item No commits are allowed after the submission deadline.
-    \item The project repository must contain a \texttt{README} including:
-    \begin{itemize}
-        \item Explanation of features and approach
-        \item Model details and evaluation methodology
-    \end{itemize}
+	\item All solutions must be developed strictly during the hackathon period.
+	\item Participants may use any programming language, framework, or machine learning library.
+	\item Organizers reserve the right to audit submissions and request source code at any time.
+	\item \textbf{GPU usage is prohibited}. All training must be performed on CPU only to ensure fair competition.
+	\item Please structure your solution neatly as notebooks or script files. 
+
 \end{enumerate}
 
 \section*{Submission Guidelines}
 
 \begin{enumerate}
-    \item For each submission, you'll receive a score depending on how accurate your predictions are.
-    \item Participants cannot make more than \textbf{3 submissions}.
-    \item The \textbf{best score out of 3} submissions is reflected on the leaderboard.
-    \item The \textbf{final total score} you get is the number of \textbf{PCOINS} you've earned.
+	\item For each submission, you'll receive a score depending on how accurate your predictions are.
+	\item Participants cannot make more than \textbf{3 submissions} for either of the two problems.
+	\item The \textbf{best score out of 3} submissions is reflected on the leaderboard.
+	\item The \textbf{final total score} you get is the number of \textbf{PCOINS} you've earned.
+	\item You must make your submission \href{https://ayushjayaswal.xyz/mlhackathon}{here}
 \end{enumerate}
 
-\section*{Judging Criteria}
-Submissions will be evaluated based on the following criteria:
-
-\begin{enumerate}
-    \item \textbf{Model Performance (50\%):} Accuracy and effectiveness of the
-    model based on the provided evaluation metric.
-    \item \textbf{Creativity \& Approach (20\%):} Innovation in feature
-    engineering, modeling strategy, and problem-solving.
-    \item \textbf{Explainability \& Clarity (15\%):} Clear explanation of model
-    choices, features, and results.
-    \item \textbf{Code Quality (15\%):} Clean, readable, modular, and
-    well-documented code.
-\end{enumerate}
 
 
 \newpage
 
-\section{Problem Statement 1: Classification}
+\section{Problem 1: Classification}
 
-{\Large \textit{26 me to duniya khatam hee :(}}
 
-\subsection{Problem Description}
 Build a machine learning model to classify whether a team will win at an event
 (\textbf{1 for winner, 0 otherwise}). Use creative feature engineering to uncover
-patterns in team dynamics, skills, and behavior. You may earn or lose
+patterns in team dynamics, skills, and behavior. You'll earn
 \textit{PCOINS} based on predictions from your model.
 
 \subsection{Dataset}
@@ -76,36 +58,38 @@ You are provided with \textbf{50,000 entries} from several events across college
 including the following features:
 
 \begin{itemize}
-    \item \textbf{leetcode\_hours (avg):} Average hours spent on LeetCode.
-    \item \textbf{leetcode\_problems (avg):} Average problems solved on LeetCode.
-    \item \textbf{team\_size:} Number of team members.
-    \item \textbf{experience:} Experience level (categorical: \texttt{beginner}, \texttt{intermediate}, \texttt{expert}).
-    \item \textbf{branch:} Engineering branch (e.g., CSE, Mechanical).
-    \item \textbf{gaming\_hours:} Hours spent gaming.
-    \item \textbf{instagram\_hours:} Hours spent on Instagram.
-    \item \textbf{social\_skill\_points:} Score representing social skills.
-    \item \textbf{connections\_among\_seniors:} Number of connections with seniors.
-    \item \textbf{connections\_with\_faculty:} Number of connections with faculty.
-    \item \textbf{connections\_among\_juniors:} Number of connections with juniors.
-    \item \textbf{have\_freshman:} Boolean indicating if the team has freshmen.
-    \item \textbf{all\_freshman:} Boolean indicating if the team consists only of freshmen.
+	\item \textbf{leetcode\_hours (avg):} Average hours spent on LeetCode.
+	\item \textbf{leetcode\_problems (avg):} Average problems solved on LeetCode.
+	\item \textbf{team\_size:} Number of team members.
+	\item \textbf{experience:} Experience level (categorical: \texttt{beginner}, \texttt{intermediate}, \texttt{expert}).
+	\item \textbf{branch:} Engineering branch (e.g., CSE, Mechanical).
+	\item \textbf{gaming\_hours:} Hours spent gaming.
+	\item \textbf{instagram\_hours:} Hours spent on Instagram.
+	\item \textbf{social\_skill\_points:} Score representing social skills.
+	\item \textbf{connections\_among\_seniors:} Number of connections with seniors.
+	\item \textbf{connections\_with\_faculty:} Number of connections with faculty.
+	\item \textbf{connections\_among\_juniors:} Number of connections with juniors.
+	\item \textbf{have\_freshman:} Boolean indicating if the team has freshmen.
+	\item \textbf{all\_freshman:} Boolean indicating if the team consists only of freshmen.
 \end{itemize}
 
 The dataset also includes a binary target variable indicating whether the team
 won the event.
+
+The dataset can be \href{https://ayushjayaswal.xyz/mlhackathon/dataset1.csv}{found here.}
 
 \subsection{Objectives}
 Develop a good enough classifier (e.g., logistic regression, random forest, or neural nets).
 
 
 \subsection{Evaluation}
-Use eval.csv (it contains 10K entries with the above qualities). Submit your predictions as a single CSV file with exactly 10,000 lines of binary output.
+Use \href{https://ayushjayaswal.xyz/mlhackathon/eval1.csv}{eval1.csv} (it contains 10K entries with the above qualities). Submit your predictions as a single CSV file with exactly 10,000 lines of binary output.
 
 \subsubsection*{Submission Format}
 \begin{itemize}
-    \item No headers
-    \item There must not be any alphanumeric characters other than 0 and 1
-    \item The i'th entry in the file must correspond to the i'th entry of the test set
+	\item No headers
+	\item There must not be any alphanumeric characters other than 0 and 1
+	\item The i'th entry in the file must correspond to the i'th entry of the eval set
 \end{itemize}
 
 
@@ -119,10 +103,10 @@ Your model must predict whether a given team will win or lose the event. You'll 
 
 \noindent\textbf{Notation:}
 \begin{itemize}
-    \item $tp$ (True Positives)
-    \item $fp$ (False Positives)
-    \item $tn$ (True Negatives)
-    \item $fn$ (False Negatives)
+	\item $tp$ (True Positives)
+	\item $fp$ (False Positives)
+	\item $tn$ (True Negatives)
+	\item $fn$ (False Negatives)
 \end{itemize}
 
 \vspace{0.3cm}
@@ -132,52 +116,48 @@ Your model must predict whether a given team will win or lose the event. You'll 
 \vspace{0.2cm}
 
 \[
-\text{Precision} =
-\begin{cases}
-\dfrac{tp}{tp + fp}, & \text{if } tp + fp > 0 \\[8pt]
-0, & \text{otherwise}
-\end{cases}
+	\text{Precision} =
+	\begin{cases}
+		\dfrac{tp}{tp + fp}, & \text{if } tp + fp > 0 \\[8pt]
+		0, & \text{otherwise}
+	\end{cases}
 \]
 
 % \noindent\textbf{Recall:}
 \[
-\text{Recall} =
-\begin{cases}
-\dfrac{tp}{tp + fn}, & \text{if } tp + fn > 0 \\[8pt]
-0, & \text{otherwise}
-\end{cases}
+	\text{Recall} =
+	\begin{cases}
+		\dfrac{tp}{tp + fn}, & \text{if } tp + fn > 0 \\[8pt]
+		0, & \text{otherwise}
+	\end{cases}
 \]
 
 % \noindent\textbf{F1-Score:}
 \[
-\text{F1-score} =
-\begin{cases}
-\dfrac{2 \times \text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}, & \text{if } \text{Precision} + \text{Recall} > 0 \\[8pt]
-0, & \text{otherwise}
-\end{cases}
+	\text{F1-score} =
+	\begin{cases}
+		\dfrac{2 \times \text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}, & \text{if } \text{Precision} + \text{Recall} > 0 \\[8pt]
+		0, & \text{otherwise}
+	\end{cases}
 \]
 
 \vspace{0.1cm}
 % \noindent\textbf{Final Score:}
 \[
-\text{Score} = \text{F1-score} \times 10000
+	\text{Score} = \text{F1-score} \times 10000
 \]
 
 \vspace{0.8cm}
 
-\noindent
-Your final score will be the sum of all PCOINS earned.
+PCOINs earned = Score
 
 
 \newpage
 
 
 
-\section{Problem Statement 2: Regression}
+\section{Problem 2: Regression}
 
-{\Large \textit{Hum pe to ho ji naww :O}}
-
-\subsection{Problem Description}
 Engineer a regression model to predict the number of participants attending
 tech fest events. Use creative feature engineering to uncover patterns in
 event appeal, logistics, and student behavior.
@@ -191,24 +171,25 @@ You are provided with \textbf{50,000 entries} from various tech fest events acro
 colleges, including the following features:
 
 \begin{itemize}
-    \item \textbf{event\_type:} Event category.
-    \item \textbf{guest:} Guest speaker type.
-    \item \textbf{organising\_department:} Hosting department
-    (e.g., CSE, ECE, ME, MM, EE, CE, ECM, PIE).
-    \item \textbf{timing:} Time of day (Morning, Afternoon, Evening, Late Night).
-    \item \textbf{day\_of\_week:} Day type (Weekday, Weekend).
-    \item \textbf{promotion\_level:} Social media reach.
-    \item \textbf{event\_duration:} Event length in hours.
-    \item \textbf{venue\_capacity:} Maximum venue capacity.
-    \item \textbf{registration\_fee:} Registration cost (INR).
-    \item \textbf{social\_media\_buzz:} Number of mentions/shares.
-    \item \textbf{concurrent\_events\_count:} Number of overlapping events.
-    \item \textbf{weather\_condition:} Weather condition (Sunny, Cloudy, Rainy, Stormy).
+	\item \textbf{event\_type:} Event category.
+	\item \textbf{guest:} Guest speaker type.
+	\item \textbf{organising\_department:} Hosting department
+		(e.g., CSE, ECE, ME, MM, EE, CE, ECM, PIE).
+	\item \textbf{timing:} Time of day (Morning, Afternoon, Evening, Late Night).
+	\item \textbf{day\_of\_week:} Day type (Weekday, Weekend).
+	\item \textbf{promotion\_level:} Social media reach.
+	\item \textbf{event\_duration:} Event length in hours.
+	\item \textbf{venue\_capacity:} Maximum venue capacity.
+	\item \textbf{registration\_fee:} Registration cost (INR).
+	\item \textbf{social\_media\_buzz:} Number of mentions/shares.
+	\item \textbf{concurrent\_events\_count:} Number of overlapping events.
+	\item \textbf{weather\_condition:} Weather condition (Sunny, Cloudy, Rainy, Stormy).
 \end{itemize}
 
 The target variable is \textbf{recorded\_participant\_count}, an integer
 representing the number of participants.
 
+The dataset can be \href{https://ayushjayaswal.xyz/mlhackathon/dataset2.csv}{found here.}
 
 \subsection{Objectives}
 Develop a good enough regression model that can predict the number of participants attending a tech fest event.
@@ -218,15 +199,15 @@ You are expected to handle categorical and numerical variables appropriately, an
 
 
 \subsection{Evaluation}
-An evaluation dataset \texttt{eval.csv} containing \textbf{10,000 entries} is
+An evaluation dataset \href{https://ayushjayaswal.xyz/mlhackathon/eval2.csv}{eval2.csv} containing \textbf{10,000 entries} is
 provided. Submit your predictions as a single CSV file with exactly \textbf{10,000 rows} of integer output, each row being predicted
 participant counts for each entry.
 
 \subsubsection*{Submission Format}
 \begin{itemize}
-    \item No headers
-    \item There must not be any alphanumeric characters other than 0 and 1
-    \item The i'th entry in the file must correspond to the i'th entry of the test set
+	\item No headers
+	\item There must not be any alphanumeric characters other than 0 and 1
+	\item The i'th entry in the file must correspond to the i'th entry of the test set
 \end{itemize}
 
 
@@ -237,11 +218,11 @@ Your model must predict the number of participants attending a tech fest event. 
 
 \noindent\textbf{Notation:}
 \begin{itemize}
-    \item $y$: True attendance value (actual number of attendees)
-    \item $\hat{y}$: Predicted attendance value (your model's prediction)
-    \item $\text{capacity}$: Maximum capacity of the venue
-    \item $\tau = 0.1$: Tolerance parameter
-    \item $e$: Prediction error
+	\item $y$: True attendance value (actual number of attendees)
+	\item $\hat{y}$: Predicted attendance value (your model's prediction)
+	\item $\text{capacity}$: Maximum capacity of the venue
+	\item $\tau = 0.1$: Tolerance parameter
+	\item $e$: Prediction error
 \end{itemize}
 
 \vspace{0.3cm}
@@ -251,19 +232,24 @@ Your model must predict the number of participants attending a tech fest event. 
 \vspace{0.2cm}
 
 \[
-\tau = 0.1
+	\tau = 0.1
 \]
 
 \[
-e = \frac{|y - \hat{y}|}{\text{capacity}}
+	e = \frac{|y - \hat{y}|}{\text{capacity}}
 \]
 
 \[
-\text{PCOINS} = \frac{1}{1 + \left(\dfrac{e}{\tau}\right)^2}
+	\text{Score} = \frac{1}{1 + \left(\dfrac{e}{\tau}\right)^2}
 \]
 
-\noindent\\[0.5cm]
-The PCOINS value ranges from 0 to 1, where 1 represents a perfect prediction and values closer to 0 indicate larger errors. Your final score for this problem is the \textbf{sum of all PCOINS} earned across all predictions.
+\noindent
+Each prediction receives a Score between 0 and 1, where 1 indicates a perfect prediction and values closer to 0 indicate larger errors.
+
+\vspace{1em}
+
+\noindent
+Your final score (\textbf{PCOINs}) is the sum of all Scores.
 
 
 \newpage
