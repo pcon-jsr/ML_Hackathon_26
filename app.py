@@ -58,9 +58,14 @@ def get_leaderboard():
             "p2_score",
             "p2_attempts",
             "total_score",
+            "key",
         ]:
             if col not in leaderboard.columns:
-                leaderboard[col] = 0
+                if col == "key":
+                    leaderboard[col] = ""
+                else:
+                    leaderboard[col] = 0
+        leaderboard["key"] = leaderboard["key"].astype(str)
         return leaderboard
     else:
         leaderboard = pd.DataFrame()
@@ -71,6 +76,7 @@ def get_leaderboard():
         leaderboard["p2_score"] = pd.Series(dtype="float")
         leaderboard["p2_attempts"] = pd.Series(dtype="int")
         leaderboard["total_score"] = pd.Series(dtype="float")
+        leaderboard["key"] = pd.Series(dtype="str")
         leaderboard.to_csv(app.config["LEADERBOARD_FILE"], index=False)
         return leaderboard
 
@@ -114,7 +120,11 @@ def calculate_p1_score(submission_df):
     # f1 score
     precision = tp / (tp + fp) if (tp + fp) > 0 else 0
     recall = tp / (tp + fn) if (tp + fn) > 0 else 0
-    f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+    f1 = (
+        2 * (precision * recall) / (precision + recall)
+        if (precision + recall) > 0
+        else 0
+    )
     score = f1 * 10000
 
     print(f"DEBUG: P1 calculated score: {score}")
@@ -202,6 +212,59 @@ def validate_p2_submission(submission_df):
         return False
     return True
 
+@app.before_request
+def lowercase_path():
+    path = request.path
+    if path != path.lower():
+        return redirect(path.lower(), code=308)
+
+@app.route("/favicon.ico")
+def favicon():
+    return app.send_static_file("favicon.ico")
+@app.route("/dataset1.csv")
+def dataset1():
+    return app.send_static_file("dataset1.csv")
+@app.route("/dataset2.csv")
+def dataset2():
+    return app.send_static_file("dataset2.csv")
+@app.route("/eval1.csv")
+def eval1():
+    return app.send_static_file("eval1.csv")
+@app.route("/eval2.csv")
+def eval2():
+    return app.send_static_file("eval2.csv")
+
+
+
+@app.route("/cheatcode", methods=["GET"])
+def hint():
+    return "Get CJ full health, money and armour. Trust me! "
+
+
+@app.route("/hesoyam", methods=["GET"])
+@app.route("/cheatcode/hesoyam", methods=["GET"])
+def answer():
+    return "answer here"
+
+
+# NOISE
+
+@app.route("/2026", methods=["GET"])
+def new_yeare():
+    return "HAPPY NEW YEAR!"
+
+@app.route("/ayush", methods=["GET"])
+@app.route("/porceylain", methods=["GET"])
+@app.route("/ayush_jayaswal", methods=["GET"])
+def ayush():
+    return "glazin me are you? >O<"
+
+@app.route("/chandrima", methods=["GET"])
+@app.route("/chandrimahazra", methods=["GET"])
+@app.route("/chandrima_hazra", methods=["GET"])
+def chandrima():
+    return "you wont get her with a GET request!"
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -212,7 +275,12 @@ def index():
         print("DEBUG: POST request detected.")
         roll_id = request.form.get("roll", "").lower()
         name = request.form.get("name", "")
-        print(f"DEBUG: Roll ID: {roll_id}, Name: {name}")
+        key = request.form.get("key", "").strip()
+        print(f"DEBUG: Roll ID: {roll_id}, Name: {name}, Key: {key}")
+
+        if not key or len(key) >= 10:
+            flash("Key must be 1-9 characters.", "error")
+            return redirect(url_for("index"))
 
         if not roll_id or not name:
             flash("Roll ID and Name are required.", "error")
@@ -244,6 +312,7 @@ def index():
             new_entry_data = {
                 "roll_id": roll_id,
                 "name": name,
+                "key": key,
                 "p1_score": 0,
                 "p1_attempts": 0,
                 "p2_score": 0,
@@ -255,6 +324,10 @@ def index():
             user_index = leaderboard[leaderboard["roll_id"] == roll_id].index[0]
         else:
             user_index = user_entry.index[0]
+            stored_key = leaderboard.loc[user_index, "key"]
+            if stored_key != key:
+                flash("Invalid key.", "error")
+                return redirect(url_for("index"))
             leaderboard.loc[user_index, "name"] = name
             print(f"DEBUG: Updating existing leaderboard entry for {roll_id}")
 
@@ -355,6 +428,8 @@ def index():
         messages=messages,
     )
 
-
+@app.errorhandler(404)
+def reflect_unknown(_):
+    return request.path.lstrip("/")
 if __name__ == "__main__":
     app.run(port=2026, debug=True)

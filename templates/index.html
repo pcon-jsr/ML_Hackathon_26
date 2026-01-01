@@ -6,14 +6,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>ML Hackathon Submission</title>
 		<style>
-			.problems, form{
-				border: 3px solid black;
-				align-items: center;
-				width: max(40rem, 30%);
-				margin: auto;
-				padding: 2rem;
-				background-color: #edbb;
-			}
+.problems, form{
+	border: 3px solid black;
+	align-items: center;
+	width: max(40rem, 30%);
+	margin: 2rem auto;
+	padding: 2rem;
+	background-color: #edbb;
+}
 
 			section{
 				border: 3px solid black;
@@ -76,6 +76,33 @@
 		<section>
 			<h1>PCON's ML HACKATHON 2026</h1>
 		</section>
+		<form method="POST" enctype="multipart/form-data">
+			<h3> Submit your results here :) </h3>
+			<label for="name">Name:</label>
+			<input type="text" id="name" name="name" required autocomplete="name"><br><br>
+
+			<label for="roll">Registration No:</label>
+			<input type="text" id="roll" name="roll" required autocomplete="roll"><br><br>
+
+			<label for="key">Submission Key:</label>
+			<input type="text" id="key" name="key" required maxlength="9" autocomplete="off"><br><br>
+
+			<label for="p1_file"><i>csv submission for problem 1: </i></label>
+			<input type="file" id="p1_file" name="p1_file" accept=".csv"><br><br>
+			<label for="p2_file"><i>csv submission for problem 2:</i></label>
+			<input type="file" id="p2_file" name="p2_file" accept=".csv"><br><br>
+
+			{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+			<ul class="flashes">
+				{% for category, message in messages %}
+				<li class="{{ category }}" style="color: {% if category == 'error' %}red{% elif category == 'success' %}green{% else %}black{% endif %};">{{ message }}</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+			{% endwith %}
+			<input type="submit" value="Submit">
+		</form>
 		<section class="problems">
 			<h2>Problems</h2>
 			<ol>
@@ -97,45 +124,21 @@
 			<h2>CSV format for submission</h2>
 			<p>
 			For problem 1, that is the classification problem: the csv file must have 10,000 lines of binary output
-				<ul>
-					<li> No headers</li>
-					<li> There must not be any alphanumeric characters other than 0 and 1</li>
-					<li> The i'th entry in the file must correspond to the ith entry of the test set</li>
-				</ul>
+			<ul>
+				<li> No headers</li>
+				<li> There must not be any alphanumeric characters other than 0 and 1</li>
+				<li> The i'th entry in the file must correspond to the ith entry of the test set</li>
+			</ul>
 			</p>
 			<p>
 			For problem 2, that is the regression problem: the csv file must have 10,000 lines of integer output
-				<ul>
-					<li> No headers</li>
-					<li> There must only be integer values in the file</li>
-					<li> The i'th entry in the file must correspond to the ith entry of the test set</li>
-				</ul>
+			<ul>
+				<li> No headers</li>
+				<li> There must only be integer values in the file</li>
+				<li> The i'th entry in the file must correspond to the ith entry of the test set</li>
+			</ul>
 			</p>
 		</section>
-		<form method="POST" enctype="multipart/form-data">
-			<h3> Submit your results here :) </h3>
-			<label for="name">Name:</label>
-			<input type="text" id="name" name="name" required><br><br>
-
-			<label for="roll">Registration No:</label>
-			<input type="text" id="roll" name="roll" required><br><br>
-
-			<label for="p1_file"><i>csv submission for problem 1: </i></label>
-			<input type="file" id="p1_file" name="p1_file" accept=".csv"><br><br>
-			<label for="p2_file"><i>csv submission for problem 2:</i></label>
-			<input type="file" id="p2_file" name="p2_file" accept=".csv"><br><br>
-
-			{% with messages = get_flashed_messages(with_categories=true) %}
-			{% if messages %}
-			<ul class="flashes">
-				{% for category, message in messages %}
-				<li class="{{ category }}" style="color: {% if category == 'error' %}red{% elif category == 'success' %}green{% else %}black{% endif %};">{{ message }}</li>
-				{% endfor %}
-			</ul>
-			{% endif %}
-			{% endwith %}
-			<input type="submit" value="Submit">
-		</form>
 		<section class="board">
 			<h2>Leaderboard</h2>
 			<div class="table-container">
@@ -167,5 +170,17 @@
 				</table>
 			</div>
 		</section>
+		<script>
+			console.log(`
+    @>-;---
+░█▀█░█▀█░█▀▄░█▀▀░█▀▀░█░█░█░░░█▀█░▀█▀░█▀█
+░█▀▀░█░█░█▀▄░█░░░█▀▀░░█░░█░░░█▀█░░█░░█░█
+░▀░░░▀▀▀░▀░▀░▀▀▀░▀▀▀░░▀░░▀▀▀░▀░▀░▀▀▀░▀░▀
+\n\n
+Did you like the pdf?\n\t Well, You can always like it more <3
+\n
+
+`)
+		</script>
 	</body>
 </html>
