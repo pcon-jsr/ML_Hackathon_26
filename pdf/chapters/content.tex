@@ -1,23 +1,22 @@
 \clearpage
+\thispagestyle{empty}
+\vspace*{\fill}
 
-    \begin{center}
-        \vspace*{1cm}
-        
-        % Project Title
-        {\huge \bfseries PCON's Annual Machine Learning \\[0.3cm]Hackathon '26}
-        
-        \vspace{2cm}
-        
-        % Date
-        {\large \today}
-        
-        \vspace{1cm}
-    \end{center}
+\begin{center}
+    % Project Title
+    {\Huge \bfseries PCON's Annual Machine Learning \\[0.5cm]Hackathon '26}
+    
+    \vspace{3cm}
+    
+    % Date
+    {\Large \today}
+\end{center}
 
+\vspace*{\fill}
 \newpage
 
 
-Welcome to \textbf{PCON’s Annual Machine Learning Hackathon ’26}, a 48-hour
+Welcome to \textbf{PCON’s Annual Machine Learning Hackathon ’26}, a 36-hour
 challenge.
 
 \section*{Rules}
@@ -26,17 +25,23 @@ challenge.
     \item Participants may use any programming language, framework, or machine
     learning library.
     \item Each participant must work on \textbf{only one} problem statement.
-    \item Participants must create a \textbf{new GitHub repository} for the
-    hackathon submission, and all work must be original.
+    \item Create a \textbf{new GitHub repository} for the hackathon submission, and all work must be original.
     \item Commit messages should be clear and meaningful.
     \item No commits are allowed after the submission deadline.
     \item The project repository must contain a \texttt{README} including:
     \begin{itemize}
-        \item Setup and execution instructions
         \item Explanation of features and approach
         \item Model details and evaluation methodology
     \end{itemize}
-    \item Submissions must strictly adhere to the selected problem statement.
+\end{enumerate}
+
+\section*{Submission Guidelines}
+
+\begin{enumerate}
+    \item For each submission, you'll receive a score depending on how accurate your predictions are.
+    \item Participants cannot make more than \textbf{3 submissions}.
+    \item The \textbf{best score out of 3} submissions is reflected on the leaderboard.
+    \item The \textbf{final total score} you get is the number of \textbf{PCOINS} you've earned.
 \end{enumerate}
 
 \section*{Judging Criteria}
@@ -94,12 +99,13 @@ Develop a good enough classifier (e.g., logistic regression, random forest, or n
 
 
 \subsection{Evaluation}
-Use eval.csv (it contains 10K entries with the above qualities). Submit your predictions as a single CSV file with 10001 lines.
+Use eval.csv (it contains 10K entries with the above qualities). Submit your predictions as a single CSV file with exactly 10,000 lines of binary output.
 
 \subsubsection*{Submission Format}
 \begin{itemize}
-    \item First line: \texttt{output}
-    \item Followed by 10,000 binary predictions (0 or 1)
+    \item No headers
+    \item There must not be any alphanumeric characters other than 0 and 1
+    \item The i'th entry in the file must correspond to the i'th entry of the test set
 \end{itemize}
 
 
@@ -151,6 +157,7 @@ Your model must predict whether a given team will win or lose the event. You'll 
 \end{cases}
 \]
 
+\vspace{0.1cm}
 % \noindent\textbf{Final Score:}
 \[
 \text{Score} = \text{F1-score} \times 10000
@@ -160,7 +167,6 @@ Your model must predict whether a given team will win or lose the event. You'll 
 
 \noindent
 Your final score will be the sum of all PCOINS earned.
-
 
 
 \newpage
@@ -213,12 +219,16 @@ You are expected to handle categorical and numerical variables appropriately, an
 
 \subsection{Evaluation}
 An evaluation dataset \texttt{eval.csv} containing \textbf{10,000 entries} is
-provided. Submit your predictions as a single CSV file containing predicted
+provided. Submit your predictions as a single CSV file with exactly \textbf{10,000 rows} of integer output, each row being predicted
 participant counts for each entry.
 
 \subsubsection*{Submission Format}
-Submit the prediction file in CSV format with exactly \textbf{10,000 rows},
-each containing a single predicted participant count.
+\begin{itemize}
+    \item No headers
+    \item There must not be any alphanumeric characters other than 0 and 1
+    \item The i'th entry in the file must correspond to the i'th entry of the test set
+\end{itemize}
+
 
 \subsubsection*{Scoring Rules}
 Your model must predict the number of participants attending a tech fest event. You'll earn PCOINS for correct predictions according to the following metrics:
@@ -256,9 +266,4 @@ e = \frac{|y - \hat{y}|}{\text{capacity}}
 The PCOINS value ranges from 0 to 1, where 1 represents a perfect prediction and values closer to 0 indicate larger errors. Your final score for this problem is the \textbf{sum of all PCOINS} earned across all predictions.
 
 
-
 \newpage
-
-
-
-
