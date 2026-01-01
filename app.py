@@ -431,5 +431,6 @@ def index():
 @app.errorhandler(404)
 def reflect_unknown(_):
     return request.path.lstrip("/")
+
 if __name__ == "__main__":
     app.run(port=2026, debug=True)
