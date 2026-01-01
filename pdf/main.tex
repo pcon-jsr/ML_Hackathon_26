@@ -1,0 +1,40 @@
+\documentclass[letterpaper, 11pt]{report}
+
+% ---------------- Packages ----------------
+\usepackage{listings}
+\usepackage{inconsolata}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{forest}
+\usepackage{float}
+\usepackage[table]{xcolor}
+\usepackage{amsmath}
+
+\geometry{margin=1in}
+
+
+% ---------------- Header & Footer ----------------
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[L]{\textbf{PCON's ML Hackathon 2026}}
+
+\renewcommand{\headrulewidth}{0.4pt}
+
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[C]{Page \thepage}
+
+
+% ---------------- Document ----------------
+\begin{document}
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{chapters/content.tex}
+
+\end{document}
+
