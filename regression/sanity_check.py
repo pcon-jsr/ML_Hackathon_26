@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load the dataset
-df = pd.read_csv("regression/train.csv")
+df = pd.read_csv("./train.csv")
 
 print("=== Regression Problem Sanity Check ===")
 print(f"Total samples: {len(df)}")
