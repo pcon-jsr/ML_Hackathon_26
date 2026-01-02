@@ -10,9 +10,6 @@ import numpy as np
 import pandas as pd
 import random
 
-SEED = 69
-np.random.seed(SEED)
-random.seed(SEED)
 
 # Dataset sizes
 N_TRAIN = 50000

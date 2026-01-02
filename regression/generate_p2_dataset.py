@@ -6,10 +6,6 @@ import random
 # CONFIGURABLE KNOBS AND WEIGHTS
 # ========================================
 
-# Set seed for reproducibility
-SEED = 42
-np.random.seed(SEED)
-random.seed(SEED)
 
 # Dataset sizes
 N_TRAIN = 50000
