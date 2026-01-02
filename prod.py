@@ -453,7 +453,7 @@ def index():
 
 @app.errorhandler(404)
 def reflect_unknown(_):
-    return request.path.lstrip("/")
+    return request.path.lstrip("/"), 404, {'Content-Type': 'text/plain; charset=utf-8'}
 
 
 if __name__ == "__main__":
