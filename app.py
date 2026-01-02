@@ -6,6 +6,7 @@ from flask import (
     url_for,
     flash,
     get_flashed_messages,
+    send_file,
 )
 import os
 import pandas as pd
@@ -244,8 +245,11 @@ def hint():
 @app.route("/hesoyam", methods=["GET"])
 @app.route("/cheatcode/hesoyam", methods=["GET"])
 def answer():
-    return "answer here"
-
+    return send_file(
+        "./cheatcodes/cheatcode2.txt",
+        mimetype="text/plain",
+        as_attachment=False
+    )
 
 # NOISE
 
@@ -430,6 +434,7 @@ def index():
 
 @app.errorhandler(404)
 def reflect_unknown(_):
-    return request.path.lstrip("/")
+    return request.path.lstrip("/"), 404, {'Content-Type': 'text/plain; charset=utf-8'}
+
 if __name__ == "__main__":
     app.run(port=2026, debug=True)

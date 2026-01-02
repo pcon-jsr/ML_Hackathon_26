@@ -284,12 +284,27 @@ for i in range(TOTAL):
         registration_fee += random.choice([20, 30, 40, 50])
     elif guest in ["influencer", "professional"]:
         registration_fee += random.choice([10, 15, 20])
-    # Cap at maximum reasonable fee
-    registration_fee = min(registration_fee, 500)
     social_media_buzz = int(
         np.random.lognormal(np.log(500), 1)
     )  # heavy-tailed, viral events exist
     concurrent_events_count = int(np.random.poisson(0.1))  # usually 0, very rarely 1
+    synergy_multiplier = 1.0
+    if event_type == "hackathon" and guest == "youtuber":
+        synergy_multiplier = 1.75
+    elif event_type == "hackathon" and guest == "professional":
+        synergy_multiplier = 1.45
+    elif event_type == "talk" and guest == "political":
+        synergy_multiplier = 1.95
+    elif event_type == "gaming" and guest in ["youtuber", "influencer"]:
+        synergy_multiplier = 1.85
+    elif event_type == "workshop" and guest in ["professional", "faculty"]:
+        synergy_multiplier = 1.60
+    elif event_type == "sport" and guest == "alumni":
+        synergy_multiplier = 1.55
+    elif event_type == "fun" and guest in ["youtuber", "influencer"]:
+        synergy_multiplier = 1.70
+    elif event_type == "seminar" and guest == "faculty":
+        synergy_multiplier = 1.30
 
     # Scores
     event_type_score = EVENT_TYPE_SCORES[event_type]
@@ -321,14 +336,19 @@ for i in range(TOTAL):
         + SCORE_WEIGHTS["weather_score"] * (weather_score / 100)
         + SCORE_BIAS
     )
+    base_score *= synergy_multiplier
+    participant_count = int(base_score) + int(np.random.normal(10,5))  # raw count without noise
+    if social_media_buzz > 2000 and guest in ["youtuber", "influencer", "political"]:
+        viral_multiplier = np.random.uniform(1.8, 2.8)  # Smooth scaling
+        participant_count = int(participant_count * viral_multiplier)
 
-    participant_count = int(base_score)  # raw count without noise
 
     # Diverse outliers (before capacity bound)
     if random.random() < OUTLIER_PROB:
         # Viral events: high buzz + popular guest
-        if social_media_buzz > 2000 and guest in ["youtuber", "influencer"]:
-            participant_count = random.choice([1000, 1200, 1500])
+        if social_media_buzz > 2000 and guest in ["youtuber", "influencer", "political"]:
+            viral_multiplier = np.random.uniform(1.8, 2.8)  # Smooth scaling
+            participant_count = int(participant_count * viral_multiplier)
         # Flops: bad weather + high fee + concurrent events
         elif (
             weather_condition in ["Rainy", "Stormy"]
