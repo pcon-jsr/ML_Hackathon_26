@@ -31,10 +31,10 @@
 ## For CTF
 |roll_id|name|p1_score|p1_attempts|p2_score|p2_attempts|total_score|
 |--------|------|----------|-------------|----------|-------------|-------------|
-|2024pgec057|Harsh Sahu|10000.0|1|10000.0|1|20000.0|
-|2024pgcs037|Tanishk|0|3|10000.0|1|10000.0|
-|2024pgcs088|Tushar Das|0|3|10000.0|2|10000.0|
-|2024pgcs113|Himanshu Gupta|10000.0|1|0.0|0|10000.0|
+|2024ugec057|Harsh Sahu|10000.0|1|10000.0|1|20000.0|
+|2024ugcs037|Tanishk|0|3|10000.0|1|10000.0|
+|2024ugcs088|Tushar Das|0|3|10000.0|2|10000.0|
+|2024ugcs113|Himanshu Gupta|10000.0|1|0.0|0|10000.0|
 
 ## CTF Checklist
 * [x] Match sample.csv and eval_labels.csv for classification
