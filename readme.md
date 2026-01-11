@@ -1,3 +1,4 @@
+![Poster](./writings/poster.png)
 # Winners
 | Position | Name | Reg. No. |
 |-|-|-|
